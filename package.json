@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/okta/okta-react.git"
+    "url": "git+https://github.com/homesomeinc/okta-react.git"
   },
   "keywords": [
     "oauth2"
