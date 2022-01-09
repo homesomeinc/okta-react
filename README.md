@@ -22,8 +22,8 @@
 * [Contributing](#contributing)
 * [Development](#development)
 
-This is a fork for internal use, in order to use okta-react with react-router v6.
-If you are not from homesome, please use the official release at https://github.com/okta/okta-react
+## This is a fork for internal use, in order to use okta-react with react-router v6. If you are not from homesome, please use the official release at [https://github.com/okta/okta-react]
+
 Okta React SDK builds on top of the [Okta Auth SDK][].
 
 This SDK is a toolkit to build Okta integration with many common "router" packages, such as [react-router][], [reach-router][], and others.
