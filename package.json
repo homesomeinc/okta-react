@@ -9,7 +9,6 @@
     "clean": "rm -rf dist && rm -rf test-reports",
     "lint": "eslint .",
     "lint:report": "eslint -f checkstyle -o ./test-reports/lint/eslint-checkstyle-result.xml .",
-    "prepare": "yarn build",
     "start": "yarn workspace @okta/okta-react-test-harness start",
     "test": "yarn lint && yarn test:unit && yarn test:e2e",
     "test:e2e": "yarn workspace @okta/okta-react-test-harness test",
