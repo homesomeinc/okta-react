@@ -20,8 +20,6 @@ var _regeneratorRuntime = require('@babel/runtime/regenerator');
 var React = require('react');
 var oktaAuthJs = require('@okta/okta-auth-js');
 var _defineProperty = require('@babel/runtime/helpers/defineProperty');
-var _objectWithoutProperties = require('@babel/runtime/helpers/objectWithoutProperties');
-var reactRouterDom = require('react-router-dom');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -50,7 +48,6 @@ var _slicedToArray__default = /*#__PURE__*/_interopDefaultLegacy(_slicedToArray)
 var _regeneratorRuntime__default = /*#__PURE__*/_interopDefaultLegacy(_regeneratorRuntime);
 var React__namespace = /*#__PURE__*/_interopNamespace(React);
 var _defineProperty__default = /*#__PURE__*/_interopDefaultLegacy(_defineProperty);
-var _objectWithoutProperties__default = /*#__PURE__*/_interopDefaultLegacy(_objectWithoutProperties);
 
 var OktaContext = /*#__PURE__*/React__namespace.createContext(null);
 var useOktaAuth = function useOktaAuth() {
@@ -177,14 +174,14 @@ var Security = function Security(_ref) {
   }, children);
 };
 
-function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty__default['default'](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty__default['default'](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var withOktaAuth = function withOktaAuth(ComponentToWrap) {
   var WrappedComponent = function WrappedComponent(props) {
     var oktaAuthProps = useOktaAuth();
-    return /*#__PURE__*/React__namespace.createElement(ComponentToWrap, _objectSpread$1(_objectSpread$1({}, oktaAuthProps), props));
+    return /*#__PURE__*/React__namespace.createElement(ComponentToWrap, _objectSpread(_objectSpread({}, oktaAuthProps), props));
   };
 
   WrappedComponent.displayName = 'withOktaAuth_' + (ComponentToWrap.displayName || ComponentToWrap.name);
@@ -233,117 +230,8 @@ var LoginCallback = function LoginCallback(_ref) {
   return loadingElement;
 };
 
-var _excluded = ["onAuthRequired", "errorComponent"];
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty__default['default'](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-var SecureRoute = function SecureRoute(_ref) {
-  var onAuthRequired = _ref.onAuthRequired,
-      errorComponent = _ref.errorComponent,
-      routeProps = _objectWithoutProperties__default['default'](_ref, _excluded);
-
-  var _useOktaAuth = useOktaAuth(),
-      oktaAuth = _useOktaAuth.oktaAuth,
-      authState = _useOktaAuth.authState,
-      _onAuthRequired = _useOktaAuth._onAuthRequired;
-
-  var match = reactRouterDom.useRouteMatch(routeProps);
-  var pendingLogin = React__namespace.useRef(false);
-
-  var _React$useState = React__namespace.useState(null),
-      _React$useState2 = _slicedToArray__default['default'](_React$useState, 2),
-      handleLoginError = _React$useState2[0],
-      setHandleLoginError = _React$useState2[1];
-
-  var ErrorReporter = errorComponent || OktaError;
-  React__namespace.useEffect(function () {
-    var handleLogin = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator__default['default']( /*#__PURE__*/_regeneratorRuntime__default['default'].mark(function _callee() {
-        var originalUri, onAuthRequiredFn;
-        return _regeneratorRuntime__default['default'].wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!pendingLogin.current) {
-                  _context.next = 2;
-                  break;
-                }
-
-                return _context.abrupt("return");
-
-              case 2:
-                pendingLogin.current = true;
-                originalUri = oktaAuthJs.toRelativeUrl(window.location.href, window.location.origin);
-                oktaAuth.setOriginalUri(originalUri);
-                onAuthRequiredFn = onAuthRequired || _onAuthRequired;
-
-                if (!onAuthRequiredFn) {
-                  _context.next = 11;
-                  break;
-                }
-
-                _context.next = 9;
-                return onAuthRequiredFn(oktaAuth);
-
-              case 9:
-                _context.next = 13;
-                break;
-
-              case 11:
-                _context.next = 13;
-                return oktaAuth.signInWithRedirect();
-
-              case 13:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function handleLogin() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-
-    if (!match) {
-      return;
-    }
-
-    if (!authState) {
-      return;
-    }
-
-    if (authState.isAuthenticated) {
-      pendingLogin.current = false;
-      return;
-    }
-
-    if (!authState.isAuthenticated) {
-      handleLogin()["catch"](function (err) {
-        setHandleLoginError(err);
-      });
-    }
-  }, [authState, oktaAuth, match, onAuthRequired, _onAuthRequired]);
-
-  if (handleLoginError) {
-    return /*#__PURE__*/React__namespace.createElement(ErrorReporter, {
-      error: handleLoginError
-    });
-  }
-
-  if (!authState || !authState.isAuthenticated) {
-    return null;
-  }
-
-  return /*#__PURE__*/React__namespace.createElement(reactRouterDom.Route, _objectSpread({}, routeProps));
-};
-
 exports.LoginCallback = LoginCallback;
 exports.OktaContext = OktaContext;
-exports.SecureRoute = SecureRoute;
 exports.Security = Security;
 exports.useOktaAuth = useOktaAuth;
 exports.withOktaAuth = withOktaAuth;
