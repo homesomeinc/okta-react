@@ -67,9 +67,7 @@ var Security = function Security(_ref) {
       return;
     }
 
-    if (oktaAuth.options.restoreOriginalUri && restoreOriginalUri) {
-      console.warn('Two custom restoreOriginalUri callbacks are detected. The one from the OktaAuth configuration will be overridden by the provided restoreOriginalUri prop from the Security component.');
-    }
+    if (oktaAuth.options.restoreOriginalUri && restoreOriginalUri) ;
 
     oktaAuth.options.restoreOriginalUri = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(oktaAuth, originalUri) {
